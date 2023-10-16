@@ -1,0 +1,17 @@
+﻿<Window x:Class="network_traffic.Views.Packets"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:network_traffic.Views"
+        xmlns:viewmodels="clr-namespace:network_traffic.ViewModels"
+        mc:Ignorable="d"
+        Title="Packets" Height="450" Width="800">
+    <Window.DataContext>
+        <viewmodels:PacketsViewModel/>
+    </Window.DataContext>
+    <Grid>
+        <DataGrid x:Name="dataGrid1" AutoGenerateColumns="True" />
+        <Button Content="Refresh Packets" HorizontalAlignment="Left" Height="50" VerticalAlignment="Top" Command="{Binding RefreshPackets}" />
+</Grid>
+</Window>
