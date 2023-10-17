@@ -1,16 +1,15 @@
 ﻿using LiveChartsCore;
 using LiveChartsCore.Defaults;
 using LiveChartsCore.SkiaSharpView;
+using LiveChartsCore.SkiaSharpView.Painting;
+using network_traffic.Models;
 using network_traffic.net;
+using network_traffic.Views;
+using PacketDotNet;
+using SkiaSharp;
 using System;
 using System.Collections.ObjectModel;
-using System.Linq;
 using System.Threading;
-using network_traffic.Views;
-using network_traffic.Models;
-using PacketDotNet;
-using LiveChartsCore.SkiaSharpView.Painting;
-using SkiaSharp;
 
 namespace network_traffic.ViewModels
 {
@@ -99,17 +98,19 @@ namespace network_traffic.ViewModels
             var udpPackets = TrafficAnalyzer.GetPacketsInfo(ProtocolType.Udp);
             var IPv4Packets = TrafficAnalyzer.GetPacketsInfo(RawIPPacketProtocol.IPv4);
             var IPv6Packets = TrafficAnalyzer.GetPacketsInfo(RawIPPacketProtocol.IPv6);
-            _devices.Add(new DateTimePoint(DateTime.Now, devices.Count));
-            _packets.Add(new DateTimePoint(DateTime.Now, packets.Count));
-            _tcpPackets.Add(new DateTimePoint(DateTime.Now, tcpPackets.Count));
-            _udpPackets.Add(new DateTimePoint(DateTime.Now, udpPackets.Count));
-            _IPv4Packets.Add(new DateTimePoint(DateTime.Now, IPv4Packets.Count));
-            _IPv6Packets.Add(new DateTimePoint(DateTime.Now, IPv6Packets.Count));
+            var time = DateTime.Now;
+            var minutes = new DateTime(time.Year, time.Month, time.Day, 0, time.Minute, time.Second);
+            _devices.Add(new DateTimePoint(minutes, devices.Count));
+            _packets.Add(new DateTimePoint(minutes, packets.Count));
+            _tcpPackets.Add(new DateTimePoint(minutes, tcpPackets.Count));
+            _udpPackets.Add(new DateTimePoint(minutes, udpPackets.Count));
+            _IPv4Packets.Add(new DateTimePoint(minutes, IPv4Packets.Count));
+            _IPv6Packets.Add(new DateTimePoint(minutes, IPv6Packets.Count));
         }
 
         public Axis[] XAxes { get; set; } =
         {
-           new DateTimeAxis(TimeSpan.FromSeconds(1), date => date.ToString("fff") + "s")
+           new DateTimeAxis(TimeSpan.FromSeconds(5), date => date.Minute + " m " + date.Second + " s")
         };
 
         private RelayCommand _showPackets;

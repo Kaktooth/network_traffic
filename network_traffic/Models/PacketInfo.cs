@@ -1,12 +1,10 @@
-﻿using System;
-using System.Buffers.Text;
+﻿using PacketDotNet;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Net;
 using System.Text;
-using System.Text.Unicode;
-using PacketDotNet;
 
 namespace network_traffic.Models
 {
@@ -29,7 +27,7 @@ namespace network_traffic.Models
         public static PacketInfo from(Packet packet)
         {
             PacketInfo packetInfo = new PacketInfo();
-          
+
             if (packet.PayloadPacket is IPv4Packet)
             {
                 var payload = ((IPv4Packet)packet.PayloadPacket);

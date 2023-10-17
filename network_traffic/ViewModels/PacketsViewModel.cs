@@ -1,12 +1,6 @@
-﻿using System.Collections.Generic;
-using MaterialDesignThemes.Wpf;
+﻿using network_traffic.Models;
 using network_traffic.net;
 using network_traffic.Views;
-using PacketDotNet;
-using System.Runtime.CompilerServices;
-using System.Threading;
-using System.Windows.Documents;
-using network_traffic.Models;
 
 namespace network_traffic.ViewModels
 {
@@ -23,7 +17,7 @@ namespace network_traffic.ViewModels
                     _packetsWindow = info;
                 }
             }
-           
+
             if (_packetsWindow.dataGrid1 != null)
             {
                 _packetsWindow.dataGrid1.ItemsSource = TrafficAnalyzer.GetPacketsInfo();

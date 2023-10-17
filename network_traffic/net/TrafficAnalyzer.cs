@@ -1,10 +1,9 @@
-﻿using PacketDotNet;
+﻿using network_traffic.Models;
+using PacketDotNet;
 using SharpPcap;
 using SharpPcap.WinDivert;
 using System.Collections.Generic;
 using System.Linq;
-using network_traffic.Models;
-using network_traffic.Views;
 
 namespace network_traffic.net
 {
